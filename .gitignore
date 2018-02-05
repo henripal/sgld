@@ -21,4 +21,6 @@ wheels/
 .ropeproject/
 */data/
 data/
+*/experiments/
+experiments/
 
