@@ -20,4 +20,5 @@ wheels/
 *.py.swp
 .ropeproject/
 */data/
+data/
 
