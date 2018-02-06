@@ -24,7 +24,7 @@ def runall(cuda_device,
         test_loader,
         lambda x: sgld.lossrate(x, a,
             b, gamma),
-        False,
+        addnoise,
         optimizer
     )
 

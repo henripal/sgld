@@ -6,3 +6,4 @@ from .trainer import *
 from .utils import *
 from .experimenter import *
 from .run import *
+from .plots import *

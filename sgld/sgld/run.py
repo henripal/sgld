@@ -17,17 +17,19 @@ import sgld
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("paramset")
+    parser.add_argument("cuda_device", type=int)
 
     args = parser.parse_args()
 
     parameters, directory = sgld.get_params(args.paramset)
+    cuda_device = args.cuda_device
     print("Using parameters: {}".format(parameters))
 
     with open(os.path.join(directory, 'config.yaml'), 'w') as f:
         yaml.dump(parameters, f, default_flow_style=False)
 
     loss, acc, val, histo, modelparams = sgld.runall(
-        parameters['cuda_device'], parameters['lr'],
+        cuda_device, parameters['lr'],
         parameters['epochs'], parameters['a'], parameters['b'],
         parameters['gamma'], parameters['addnoise']) 
     
