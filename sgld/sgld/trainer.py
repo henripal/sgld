@@ -1,9 +1,34 @@
 from torch.autograd import Variable
 import torch.nn.functional as F
 import numpy as np
+from .model import *
+from .sgld_optimizer import *
+from .preproc import *
+import torch
+import sgld
 
-def lossrate(t, a, b, gamma):
-    return a * np.power(b, gamma) / np.power((t + b), gamma)
+def runall(cuda_device,
+    lr,
+    epochs,
+    a, b, gamma,
+    addnoise):
+    torch.cuda.set_device(cuda_device)
+    model = MnistModel()
+    train_loader, test_loader = sgld.make_datasets()
+    model = model.cuda()
+    optimizer = SGLD(model.parameters(), lr=lr)
+    loss, acc, val, histo = train(
+        model,
+        epochs,
+        train_loader,
+        test_loader,
+        lambda x: sgld.lossrate(x, a,
+            b, gamma),
+        False,
+        optimizer
+    )
+
+    return loss, acc, val, histo, model.state_dict()
 
 def train(model, epochs, train_loader, test_loader, lossfunc, addnoise, optimizer):
     i = 0 
