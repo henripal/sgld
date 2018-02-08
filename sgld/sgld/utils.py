@@ -40,3 +40,15 @@ def make_dict(experiment_dir, basedir):
             results[filename[:-4]] = np.load(path)
             
     return results
+
+def state_dict_histo_2_numpy(state_dict_histo):
+    history_np = []
+    for timestep_data in state_dict_histo:
+        history_timestep = []
+        for key, val in timestep_data.items():
+            history_timestep.append(val.ravel())
+            
+        history_np.append(np.hstack(history_timestep))
+
+    return np.vstack(history_np)
+        

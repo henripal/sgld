@@ -28,7 +28,7 @@ def runall(cuda_device,
         optimizer
     )
 
-    return loss, acc, val, histo, model.state_dict()
+    return loss, acc, val, histo
 
 def train(model, epochs, train_loader, test_loader, lossfunc, addnoise, optimizer):
     i = 0 
@@ -58,10 +58,10 @@ def train(model, epochs, train_loader, test_loader, lossfunc, addnoise, optimize
             epoch_acc.append(accuracy)
             epoch_loss.append(loss.data[0])
             
-            bigparams = []
-            for p in model.parameters():
-                bigparams.append(p.data.cpu().numpy().ravel())
-            parameter_history.append(np.hstack(bigparams))
+            statedict = model.state_dict().copy()
+            for k, v in statedict.items():
+                statedict.update({k: v.cpu().numpy()})
+            parameter_history.append(statedict)
                 
         model.eval()
         for data, target in test_loader:
@@ -82,6 +82,5 @@ def train(model, epochs, train_loader, test_loader, lossfunc, addnoise, optimize
                                                                 np.mean(epoch_val)))
         
     print('Total number of steps: {}'.format(i))
-    parameter_history = np.vstack(parameter_history)
 
     return lloss, acc, val, parameter_history

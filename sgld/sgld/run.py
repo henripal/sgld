@@ -28,7 +28,7 @@ def main():
     with open(os.path.join(directory, 'config.yaml'), 'w') as f:
         yaml.dump(parameters, f, default_flow_style=False)
 
-    loss, acc, val, histo, modelparams = sgld.runall(
+    loss, acc, val, histo = sgld.runall(
         cuda_device, parameters['lr'],
         parameters['epochs'], parameters['a'], parameters['b'],
         parameters['gamma'], parameters['addnoise']) 
@@ -37,8 +37,7 @@ def main():
     np.save(os.path.join(directory, 'loss.npy'), loss)
     np.save(os.path.join(directory, 'acc.npy'), acc)
     np.save(os.path.join(directory, 'val.npy'), val)
-    np.save(os.path.join(directory, 'histo.npy'), histo)
-    torch.save(modelparams, os.path.join(directory, 'model.tch'))
+    torch.save(histo, os.path.join(directory, 'histo'))
 
 
 if __name__ == '__main__':
