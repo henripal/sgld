@@ -37,7 +37,7 @@ def make_dict(experiment_dir, basedir):
     for filename in os.listdir(os.path.join(basedir, experiment_dir)):
         if filename[-3:] == 'npy':
             path = os.path.join(basedir, experiment_dir, filename)
-            results[filename[:-4]] = np.load(path)
+            tesults[filename[:-4]] = np.load(path)
             
     return results
 

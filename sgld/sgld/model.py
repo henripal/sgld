@@ -2,9 +2,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class MnistModel(nn.Module):
-    def __init__(self, n_filters1=32,
-            n_filters2=32,
-            n_fc=128,
+    def __init__(self, n_filters1=64,
+            n_filters2=64,
+            n_fc=256,
             dropout=False):
 
         super(MnistModel, self).__init__()

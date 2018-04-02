@@ -10,7 +10,7 @@ def make_datasets(bs=1024, test_bs=4096, noise=0):
             transform=transforms.Compose([NoiseTransform(noise),
                                      transforms.ToTensor()])),
         batch_size=bs,
-        shuffle=True)
+        shuffle=False)
 
     test_loader = torch.utils.data.DataLoader(
         datasets.MNIST('data',
