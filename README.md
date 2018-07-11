@@ -1,4 +1,5 @@
-# Repo for Scipy '18: "Physics - a Gateway to Bayesian Deep Learning"
+# Physics - a Gateway to Bayesian Deep Learning
+
 ## Links
 
 You can find the slides
@@ -12,6 +13,8 @@ The posts presenting a slightly more in-depth version of the material are on my
 
 Our ICML '18 workshop paper: [Scalable Natural Gradient Langevin
 Dynamics](https://arxiv.org/abs/1806.02855)
+
+You can follow me [on twitter](https://twitter.com/henripal).
 
 ## Code
 
